@@ -7,10 +7,10 @@ namespace api_Cotizador.Models
 {
     public class PaqueteRespuesta
     {
-        public int CodigoPostal { get; set; }
-        public float Peso { get; set; }
-        public string TipoSolicitud { get; set; }
-        public string Tamano { get; set; }
-        public float Precio { get; set; }
+        public int PastalCode { get; set; }
+        public float Weight { get; set; }
+        public string HasPichup { get; set; }
+        public string PackageSize { get; set; }
+        public float Price{ get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace api_Cotizador.Models
 {
     public class Paquete
     {
-        public int CodigoPostal { get; set; }
-        public float Peso { get; set; }
-        public int  Recoleccion { get; set; }
+        public int PastalCode { get; set; }
+        public float Weight { get; set; }
+        public int HasPichup { get; set; }
         //se usara la misma nomenclatura 
         //0=recoleccion
         //1=entrega
-        public string Tamano { get; set; }
+        public string PackageSize { get; set; }
         //los tamaños seran chicos, medianos, grandes
 
     }

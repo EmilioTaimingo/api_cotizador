@@ -21,7 +21,7 @@ namespace api_Cotizador.Context
             foreach (var p in oPaquetes)
             {
                 
-                var cp = p.CodigoPostal;
+                var cp = p.PastalCode;
                 int i;
                 if (!Int32.TryParse(cp.ToString(), out i))
                 {
@@ -41,7 +41,7 @@ namespace api_Cotizador.Context
             paquete = 1;
             foreach (var p in oPaquetes)
             {
-                var peso = p.Peso;
+                var peso = p.Weight;
                 float i;
                 if (!float.TryParse(peso.ToString(), out i)|| peso==0)
                 {
@@ -56,7 +56,7 @@ namespace api_Cotizador.Context
             foreach (var p in oPaquetes)
             {
 
-                var r = p.Recoleccion;
+                var r = p.HasPichup;
                 int i;
                 if (!Int32.TryParse(r.ToString(), out i))
                 {
@@ -75,7 +75,7 @@ namespace api_Cotizador.Context
             paquete= 1;
             foreach (var p in oPaquetes)
             {
-                var r = p.Tamano;
+                var r = p.PackageSize;
                 r = r.Replace(" ", "");
                 r = r.ToUpper();
                 if (r!="CHICO"&& r != "MEDIANO"&& r != "GRANDE")

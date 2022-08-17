@@ -8,7 +8,7 @@ using api_Cotizador.Context;
 
 namespace api_Cotizador.Controllers
 {
-    public class CotizadorController:ApiController
+    public class PricingQuoteController:ApiController
     {
         public Reply Post([FromBody] List<Paquete> oPaquetes)
         {
@@ -29,13 +29,13 @@ namespace api_Cotizador.Controllers
             {
                 foreach (var p in oPaquetes)
                 {
-                    var l = oZona.Valida_Codigo(p.CodigoPostal.ToString());
+                    var l = oZona.Valida_Codigo(p.PastalCode.ToString());
                     var opv = new PaqueteVerificado
                     {
-                        CodigoPostal = p.CodigoPostal,
-                        Peso = p.Peso,
-                        Recoleccion = p.Recoleccion,
-                        Tamano = p.Tamano,
+                        CodigoPostal = p.PastalCode,
+                        Peso = p.Weight,
+                        Recoleccion = p.HasPichup,
+                        Tamano = p.PackageSize,
                     };
                     oPVerificados.Add(opv);
                     if (l == true)
@@ -51,7 +51,7 @@ namespace api_Cotizador.Controllers
             }
             catch(Exception e)
             {
-                Result.Message = "Datos incorrectos";
+                Result.Message = "Incorrect data";
                 Result.Result = 401;
             }
             
@@ -115,27 +115,27 @@ namespace api_Cotizador.Controllers
 
                 PaqueteRespuesta pr = new PaqueteRespuesta();
                 //almacenamos el paquete en la lista que devolveremos  
-                pr.Tamano=p.Tamano;
-                pr.CodigoPostal = p.CodigoPostal;
+                pr.PackageSize =p.Tamano;
+                pr.PastalCode = p.CodigoPostal;
                 if(p.Cobertura==true)
                 {
                     if(p.Recoleccion==0)
                     {
-                        pr.TipoSolicitud = "Recoleccion";
+                        pr.HasPichup = "No";
                     }
                     if(p.Recoleccion == 1)
                     {
-                        pr.TipoSolicitud = "Entrega";
+                        pr.HasPichup = "Yes";
                     }
 
                 }
                 else
                 {
-                    pr.TipoSolicitud = "Sin covertura";
+                    pr.HasPichup= "No delivery coverage";
                 }
-                pr.Peso = p.Peso;
-                pr.Tamano = p.Tamano;
-                pr.Precio = p.PrecioPaquete;
+                pr.Weight = p.Peso;
+                pr.PackageSize = p.Tamano;
+                pr.Price = p.PrecioPaquete;
                 oPRespuesta.Add(pr);    
                 paq++;
             }
@@ -145,19 +145,19 @@ namespace api_Cotizador.Controllers
 
             if (pTRecoleccion<350.0f)
             {
-                Result.Precio_Total = pTEntrega + 350.0f+ppRecoleccion;
+                Result.TotalPrice = pTEntrega + 350.0f+ppRecoleccion;
             }
             else
             {
-                Result.Precio_Total = pTEntrega + pTRecoleccion+ppRecoleccion;
+                Result.TotalPrice = pTEntrega + pTRecoleccion+ppRecoleccion;
             }
-            Result.Message = "Ok, cotizacion realizada con exito";
+            Result.Message = "Ok";
             Result.Result = 200;
-            Result.Total_Paquetes_Ingresados = oPRespuesta.Count;
-            Result.paquete = oPRespuesta;
-            Result.Paquetes_Sin_Covertura = pSCovertura;
-            Result.Paquetes_para_Entrega= pEntrega;
-            Result.Paquetes_para_Recoleccion= pRecoleccion;
+            Result.NumberOfPackages = oPRespuesta.Count;
+            Result.Package = oPRespuesta;
+            Result.PackagesWithoutCoverage = pSCovertura;
+            Result.DeliveryPackages= pEntrega;
+            Result.PickUpPackages= pRecoleccion;
           
             return Result;
         }

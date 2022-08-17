@@ -200,7 +200,7 @@
     <Compile Include="Context\ValidaInformacion.cs" />
     <Compile Include="Context\ValidaPesoPrecioCommand.cs" />
     <Compile Include="Context\ZonasCommand.cs" />
-    <Compile Include="Controllers\CotizadorController.cs" />
+    <Compile Include="Controllers\PricingQuoteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
