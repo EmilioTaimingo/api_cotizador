@@ -72,7 +72,7 @@ namespace api_Cotizador.Controllers
             
             foreach (var p in lista)
             {
-                if (p.Recoleccion==0&& p.Cobertura==true)//si es recoleccion sumamos el precio a recoleccion
+                if (p.Recoleccion==false&& p.Cobertura==true)//si es recoleccion sumamos el precio a recoleccion
                 {
                     // verificamos el precio de la recoleccion
                     if (p.Categoria_Precio == 1)
@@ -103,7 +103,7 @@ namespace api_Cotizador.Controllers
                         ppRecoleccion = ppRecoleccion + p.PrecioPaquete;
                     }
                 }
-                if(p.Recoleccion==1&&p.Cobertura==true)//si es entrega sumamos el precio a entrega 
+                if(p.Recoleccion==true&&p.Cobertura==true)//si es entrega sumamos el precio a entrega 
                 {
                     pTEntrega = pTEntrega + p.PrecioPaquete;
                     pEntrega++;//incrementamos los paquetes a entregar
@@ -119,11 +119,11 @@ namespace api_Cotizador.Controllers
                 pr.PastalCode = p.CodigoPostal;
                 if(p.Cobertura==true)
                 {
-                    if(p.Recoleccion==0)
+                    if(p.Recoleccion==false)
                     {
                         pr.HasPichup = "No";
                     }
-                    if(p.Recoleccion == 1)
+                    if(p.Recoleccion == true)
                     {
                         pr.HasPichup = "Yes";
                     }
@@ -143,13 +143,17 @@ namespace api_Cotizador.Controllers
             //preparamos la informacion que vamos a retornar
 
 
-            if (pTRecoleccion<350.0f)
+            if (pTRecoleccion<350.0f&& pRecoleccion!=0)
             {
                 Result.TotalPrice = pTEntrega + 350.0f+ppRecoleccion;
             }
-            else
+            else if (pTRecoleccion > 350.0f && pRecoleccion != 0)
             {
                 Result.TotalPrice = pTEntrega + pTRecoleccion+ppRecoleccion;
+            }
+            else
+            {
+                Result.TotalPrice = pTEntrega;
             }
             Result.Message = "Ok";
             Result.Result = 200;

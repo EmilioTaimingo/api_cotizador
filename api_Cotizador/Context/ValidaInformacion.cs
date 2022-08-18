@@ -12,10 +12,7 @@ namespace api_Cotizador.Context
         {
             Reply reply = new Reply();
 
-            bool V_codigo = false;
-            bool V_peso = false;
-            bool V_Recoleccion = false;
-            bool V_Tamano = false;
+           
             int paquete = 1;
             //verificamos que los codigos postales esten correctos 
             foreach (var p in oPaquetes)
@@ -57,19 +54,16 @@ namespace api_Cotizador.Context
             {
 
                 var r = p.HasPichup;
-                int i;
-                if (!Int32.TryParse(r.ToString(), out i))
+                var recoleccion = r.ToString();
+                
+                
+                if (recoleccion!="True"&&recoleccion!="False")
                 {
-                    reply.Message = "El valor de recoleccion es 0 = Recoleccion y 1 =Entrega. Revisa el paquete numero: "+paquete.ToString();
+                    reply.Message = "El valor de recoleccion es false = Recoleccion y  true = Entrega. Revisa el paquete numero: "+paquete.ToString();
                     reply.Result = 403;
                     return reply;
                 }
-                if (r>1)
-                {
-                    reply.Message = "El valor de recoleccion es 0 = Recoleccion y 1 =Entrega. Revisa el paquete numero: "+paquete.ToString();
-                    reply.Result = 403;
-                    return reply;
-                }
+             
                 paquete++;
             }
             paquete= 1;

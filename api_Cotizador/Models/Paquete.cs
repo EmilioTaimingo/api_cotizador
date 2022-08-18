@@ -9,7 +9,7 @@ namespace api_Cotizador.Models
     {
         public int PastalCode { get; set; }
         public float Weight { get; set; }
-        public int HasPichup { get; set; }
+        public bool HasPichup { get; set; }
         //se usara la misma nomenclatura 
         //0=recoleccion
         //1=entrega

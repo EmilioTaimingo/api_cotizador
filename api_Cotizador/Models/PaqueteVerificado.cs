@@ -9,7 +9,7 @@ namespace api_Cotizador.Models
     {
         public int CodigoPostal { get; set; }
         public float Peso { get; set; }
-        public int Recoleccion { get; set; }
+        public bool Recoleccion { get; set; }
         //se usara la misma nomenclatura 
         //0=recoleccion
         //1=entrega

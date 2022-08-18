@@ -20,23 +20,23 @@ namespace api_Cotizador.Context
             {
                 if(oPVerificados[i].Cobertura == true)
                 {
-                    if (oPVerificados[i].Peso >= 0.1 && oPVerificados[i].Peso<2.1)
+                    if (oPVerificados[i].Peso > 0 && oPVerificados[i].Peso<=2.0)
                     {
                         oPVerificados[i].Categoria_Peso = 1;
                         p1++;
                     }
-                      else if (oPVerificados[i].Peso >= 2.1 && oPVerificados[i].Peso < 5.1)
+                      else if (oPVerificados[i].Peso > 2.0 && oPVerificados[i].Peso <= 5.0)
                         {
                             oPVerificados[i].Categoria_Peso = 2;
                             p2++;
                         }
-                            else if (oPVerificados[i].Peso >= 5.1 && oPVerificados[i].Peso < 10.1)
+                            else if (oPVerificados[i].Peso > 5 && oPVerificados[i].Peso <= 10.0)
                             {
                                 oPVerificados[i].Categoria_Peso = 3;
                              p3++;
                             }
                            //verificar que pasa con los paquetes que exeden del peso mayor de 20kg
-                            else if (oPVerificados[i].Peso >= 10.1 && oPVerificados[i].Peso < 1000)
+                            else if (oPVerificados[i].Peso > 10.0 && oPVerificados[i].Peso < 1000)
                             {
                                 oPVerificados[i].Categoria_Peso = 4;
                             p4++;
